@@ -1,10 +1,11 @@
-import api_request
+from api_request import *
 import sqlite3
 
 db = sqlite3.connect("superheroes.db")
 db_cursor = db.cursor()
-
-def create_tables(db, cursor):
+api = DC_API()
+data  = api.get_data()
+def create_tables():
     query1 = '''
         CREATE TABLE IF NOT EXISTS SUPERHEROES(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,7 +32,7 @@ def create_tables(db, cursor):
     '''
     query2 = '''
         CREATE TABLE IF NOT EXISTS SUPERHEROES_STATS(
-            id INTEGER PRIMARY KEY NOT NULL,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             intelligence Integer,
             strength INTEGER NOT NULL,
             speed INTEGER NOT NULL,
@@ -40,6 +41,39 @@ def create_tables(db, cursor):
             COMBAT INTEGER NOT NULL
         );
     '''
-    cursor.execute(query1)
-    cursor.execute(query2)
-    db.close
+    db_cursor.execute(query1)
+    db_cursor.execute(query2)
+    db.close()
+
+def populate_tables():
+    for i in data:
+        ###TABLA_SUPERHEROES
+        name = i['name']
+        full_name = i['biography']['full-name']
+        alter_egos = i['biography']['alter-egos']
+        aliases = i['biography']['aliases']
+        place_of_birth = i['biography']['place-of-birth']
+        first_appearance = i['biography']['first-appearance']
+        publisher = i['biography']['publisher']
+        alignment = i['biography']['alignment']
+        gender = i['appearance']['gender']
+        race = i['appearance']['race']
+        height = i['appearance']['height']
+        weight = i['appearance']['weight']
+        eye_color = i['appearance']['eye-color']
+        hair_color = i['appearance']['hair_color']
+        occupation =  i['work']['occupation']
+        base = i['work']['base']
+        group_affiliation = i['connections']['group-affiliation']
+        relatives = i['connections']['relatives']
+        image = i['image']['url']
+
+        ##TALBA SUPERHEROES_STATS
+        intelligence = i['powerstats']['intelligence']
+        strenght = i['powerstats']['intelligence']
+        speed = i['powerstats']['speed']
+        durability = i['powerstats']['durability']
+        power = i['powerstats']['power']
+        combat = i['powerstats']['combat']
+
+        query1 = f'''
