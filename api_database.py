@@ -6,6 +6,7 @@ db_cursor = db.cursor()
 api = DC_API()
 data  = api.get_data()
 def create_tables():
+    #QUERY PARA CREAR SUPERHEROES
     query1 = '''
         CREATE TABLE IF NOT EXISTS SUPERHEROES(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -13,7 +14,7 @@ def create_tables():
             full-name VARCHAR(100),
             ater-egos VARCHAR(100),
             aliases VARCHAR(100),
-            place_of_birth VARCHAR(100),
+            place-of-birth VARCHAR(100),
             first-appearance VARCHAR(100),
             publisher VARCHAR(100),
             alignment VARCHAR(100),
@@ -30,6 +31,7 @@ def create_tables():
             image varchar (300)
         );
     '''
+    ##QUERY PARA CREAR SUPERHEROES_STATS
     query2 = '''
         CREATE TABLE IF NOT EXISTS SUPERHEROES_STATS(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -41,14 +43,14 @@ def create_tables():
             COMBAT INTEGER NOT NULL
         );
     '''
+    ##EJECUCION PARA CREACION DE TABLAS
     db_cursor.execute(query1)
     db_cursor.execute(query2)
-    db.close()
 
 def populate_tables():
     for i in data:
         ###TABLA_SUPERHEROES
-        name = i['name']
+        name = i['nam{']
         full_name = i['biography']['full-name']
         alter_egos = i['biography']['alter-egos']
         aliases = i['biography']['aliases']
@@ -77,3 +79,45 @@ def populate_tables():
         combat = i['powerstats']['combat']
 
         query1 = f'''
+        INSERT INTO SUPERHEROES(name,
+        full-name,
+        alter-egos,
+        aliases,
+        place-of-birth,
+        first-appearance,
+        publisher,
+        alignment,
+        gender,
+        race,
+        height,
+        weight,
+        eye-color,
+        hair-color,
+        occupation,
+        base,
+        group-affiliation,
+        relatives,
+        image) Values
+        ("{name}","{full_name}","{alter_egos}","{aliases}","{place_of_birth}","{first_appearance}"
+        ,"{publisher}","{alignment}","{gender}","{race}","{height}","{weight}","{eye_color}","{hair_color}",
+        "{occupation}","{base}","{group_affiliation}","{relatives}","{image}");
+        '''
+
+        query2 = f'''
+        INSERT INTO SUPERHEROES_STATS(
+            intelligence, strenght, speed,
+            durability, power, combat), 
+            values("{intelligence}","{strenght}","{speed}",
+            "{durability}","{power}","{combat}");
+        '''
+
+        try:
+            db_cursor.execute(query1)
+
+        except:
+            print("FALLO EN LA 1")
+
+        try:
+            db_cursor.execute(query2)
+        except:
+            print("fallo en la 2")
