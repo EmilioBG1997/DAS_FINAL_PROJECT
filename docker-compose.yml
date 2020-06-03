@@ -22,7 +22,7 @@ services:
   db:
     image: postgres
     container_name: dc_db
-    restart: always
+    #restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -33,6 +33,7 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
     ports: 
       - 5432:5432
+  
   # redis:
   #   image: redis:latest
   #   container_name: dc_redis
@@ -51,3 +52,5 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "postgres"
     ports:
       - "16543:80"
+volumes:
+  pgdata:
