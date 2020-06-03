@@ -9,7 +9,7 @@ services:
   #     - type: bind
   #       source: ./app
   #       target: /usr/src/app
-  #   command: ["python", "./api_database.py"]
+  #   command: ["python", "./populate.py"]
   app:
     build: ./app
     container_name: dc_app
