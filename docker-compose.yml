@@ -3,22 +3,24 @@ services:
   script:
     build: ./app
     container_name: dc_script
-    links:
-      - db
+    networks:
+      - dcpy
+    depends_on:
+      - "db"
+    restart: on-failure:10
     volumes:
-      - type: bind
-        source: ./app
-        target: /usr/src/app
+      - ./app:/usr/src/app
     command: ["python", "./populate.py"]
   app:
     build: ./app
     container_name: dc_app
+    restart: on-failure:10
     ports:
       - "5000:5000"
     volumes:
-      - type: bind
-        source: ./app
-        target: /usr/src/app
+      - ./app:/usr/src/app
+    networks:
+      - dcpy
   db:
     container_name: dc_db
     image: postgres
@@ -27,13 +29,12 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       PGDATA: /data/postgres
     volumes:
-       - $PWD/pg-data/:/data/postgres
-       - ./db:/docker-entrypoint-initdb.d/:ro
-
+      - $PWD/pg-data/:/data/postgres
+      - ./db:/docker-entrypoint-initdb.d/:ro
     ports:
       - "5432:5432"
     networks:
-      - default
+      - dcpy
     restart: unless-stopped
   # 
   #   image: postgres
@@ -69,9 +70,12 @@ services:
     volumes:
        - $PWD/pgadmin-data/:/root/.pgadmin
     ports:
-      - "${PGADMIN_PORT:-16543}:80"
+      - "${PGADMIN_PORT:-5050}:80"
     networks:
-      - default
+      - dcpy
     depends_on:
       - "db"
     restart: unless-stopped
+networks:
+  dcpy:
+    driver: bridge
