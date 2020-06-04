@@ -1,15 +1,15 @@
 version: "3.2"
 services:
-  # script:
-  #   build: ./app
-  #   container_name: dc_script
-  #   links:
-  #     - db
-  #   volumes:
-  #     - type: bind
-  #       source: ./app
-  #       target: /usr/src/app
-  #   command: ["python", "./api_database.py"]
+  script:
+    build: ./app
+    container_name: dc_script
+    links:
+      - db
+    volumes:
+      - type: bind
+        source: ./app
+        target: /usr/src/app
+    command: ["python", "./populate.py"]
   app:
     build: ./app
     container_name: dc_app
@@ -20,20 +20,36 @@ services:
         source: ./app
         target: /usr/src/app
   db:
-    image: postgres
     container_name: dc_db
-    restart: always
+    image: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: dc_heroes
-    networks: 
-      - default
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/postgres
     volumes:
-      - ./data.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./postgres-data:/var/lib/postgresql/data
-    ports: 
-      - 5432:5432
+       - $PWD/pg-data/:/data/postgres
+       - ./db:/docker-entrypoint-initdb.d/:ro
+
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+    restart: unless-stopped
+  # 
+  #   image: postgres
+  #   container_name: dc_db
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: dc_heroes
+  #   networks: 
+  #     - default
+  #   volumes:
+  #     - ./data.sql:/docker-entrypoint-initdb.d/init.sql
+  #     - ./postgres-data:/var/lib/postgresql/data
+  #   ports: 
+  #     - 5432:5432
   # redis:
   #   image: redis:latest
   #   container_name: dc_redis
@@ -45,10 +61,17 @@ services:
   #       target: /redis.conf
   #   command: ["redis-server", "/redis.conf"]
   pgadmin:
-    image: dpage/pgadmin4
     container_name: dc_pgadmin
+    image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "postgres"
-      PGADMIN_DEFAULT_PASSWORD: "postgres"
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-postgres}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-postgres}
+    volumes:
+       - $PWD/pgadmin-data/:/root/.pgadmin
     ports:
-      - "16543:80"
+      - "${PGADMIN_PORT:-16543}:80"
+    networks:
+      - default
+    depends_on:
+      - "db"
+    restart: unless-stopped

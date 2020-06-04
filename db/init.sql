@@ -1,34 +1,37 @@
 CREATE SERVER DAS_SISTEMAS FOREIGN DATA WRAPPER "default";
 CREATE DATABASE dc_heroes;
+\c dc_heroes;
 CREATE TABLE IF NOT EXISTS SUPER_HEROE(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50),
-    full_name VARCHAR(100),
-    ater_egos VARCHAR(100),
-    aliases VARCHAR(100),
-    place_of_birth VARCHAR(100),
-    first_appearance VARCHAR(100),
-    publisher VARCHAR(100),
-    alignment VARCHAR(100),
-    gender VARCHAR(100),
-    race VARCHAR(100),
-    height VARCHAR(100),
-    weight VARCHAR(100),
-    eye_color VARCHAR(100),
-    hair_color VARCHAR(100),
-    occupation Varchar(200),
-    base VARCHAR(200),
-    group_affiliation VARCHAR(300),
-    relatives VARCHAR(300),
-    image varchar (300)
+    id SERIAL NOT NULL,
+    name varchar(50),
+    full_name varchar(100),
+    alter_egos varchar(100),
+    aliases varchar(100),
+    place_of_birth varchar(100),
+    first_appearance varchar(100),
+    publisher varchar(100),
+    alignment varchar(100),
+    gender varchar(100),
+    race varchar(100),
+    height varchar(100),
+    weight varchar(100),
+    eye_color varchar(100),
+    hair_color varchar(100),
+    occupation varchar(200),
+    base varchar(200),
+    group_affiliation varchar(300),
+    relatives varchar(300),
+    image varchar(300),
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS SUPERHEROES_STATS(
-    id INTEGER PRIMARY KEY NOT NULL,
-    intelligence Integer,
-    strength INTEGER NOT NULL,
-    speed INTEGER NOT NULL,
-    durability INTEGER NOT NULL,
-    power INTEGER NOT NULL,
-    COMBAT INTEGER NOT NULL
+    id integer ,
+    intelligence integer,
+    strength integer,
+    speed integer,
+    durability integer,
+    power integer,
+    COMBAT integer,
+    PRIMARY KEY (id)
 );

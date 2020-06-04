@@ -7,7 +7,7 @@ class DC_API(object):
         self.ENDPOINT = "https://www.superheroapi.com/api.php/180962903366604"
         self.DC = []
     def get_data(self):
-        for i in range(1, 20):
+        for i in range(1, 100):
             uri = f"{self.ENDPOINT}/{i}"
             r = requests.get(uri)
             r = json.loads(r.text)
