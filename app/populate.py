@@ -5,10 +5,19 @@ from api_request import DC_API
 def main():
     api = DC_API()
     data = api.get_data()
-
+    id = 0
     for i in data:
         try:
-            dc = SUPER_HEROE.get_or_create(
+            SUPER_HEROE.create_table()
+        except:
+            pass
+        try: 
+            occupation = i.get("work",{}).get("occupation")
+        except:
+            occupation = "None"
+        try:
+            SUPER_HEROE.get_or_create(
+                id = id,
                 name = i.get("name"),
                 full_name = i.get("biography",{}).get("full-name"),
                 alter_egos = i.get("biography",{}).get("alter-egos"),
@@ -23,14 +32,14 @@ def main():
                 weight = i.get("appearance",{}).get("weight")[1],
                 eye_color = i.get("appearance",{}).get("eye-color"),
                 hair_color = i.get("appearance",{}).get("hair-color"),
-                occupation = i.get("work",{}).get("occupation"),
+                occupation = occupation,
                 base = i.get("work",{}).get("base"),
                 group_affiliation = i.get("connections",{}).get("group-affiliation"),
                 relatives = i.get("connections",{}).get("relatives"),
-                image = i.get("image").get("url")
+                image = i.get("image",{}).get("url")
             )
-        except Exception as e:
-            print(e)
+        except:
+            print(" no se agrego ")
+        id += 1
 if __name__ == "__main__":
     main()
-    
