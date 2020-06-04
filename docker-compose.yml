@@ -1,15 +1,15 @@
 version: "3.2"
 services:
-  # script:
-  #   build: ./app
-  #   container_name: dc_script
-  #   links:
-  #     - db
-  #   volumes:
-  #     - type: bind
-  #       source: ./app
-  #       target: /usr/src/app
-  #   command: ["python", "./populate.py"]
+  script:
+    build: ./app
+    container_name: dc_script
+    links:
+      - db
+    volumes:
+      - type: bind
+        source: ./app
+        target: /usr/src/app
+    command: ["python", "./populate.py"]
   app:
     build: ./app
     container_name: dc_app

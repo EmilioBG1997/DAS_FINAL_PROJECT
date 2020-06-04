@@ -8,10 +8,10 @@ db = PostgresqlExtDatabase(
     password = "postgres", 
     )
 
-class SuperHeroe(Model):
+class Super_heroe(Model):
     name = CharField()
     full_name = CharField()
-    ater_egos = CharField()
+    alter_egos = CharField()
     aliases = CharField()
     place_of_birth = CharField()
     first_appearance = CharField()
