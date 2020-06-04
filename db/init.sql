@@ -16,11 +16,11 @@ CREATE TABLE IF NOT EXISTS SUPER_HEROE(
     weight varchar(200),
     eye_color varchar(200),
     hair_color varchar(200),
-    occupation varchar(500),
-    base varchar(500),
-    group_affiliation varchar(500),
-    relatives varchar(500),
-    image varchar(500),
+    occupation text(500),
+    base text(500),
+    group_affiliation text(500),
+    relatives text(500),
+    image text(500),
     PRIMARY KEY(id)
 );
 
