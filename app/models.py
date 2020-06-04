@@ -31,3 +31,4 @@ class Super_heroe(Model):
 
     class Meta:
         database = db
+        db_table = 'SUPER_HEROE'

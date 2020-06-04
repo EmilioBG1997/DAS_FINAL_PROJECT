@@ -1,15 +1,15 @@
 version: "3.2"
 services:
-  script:
-    build: ./app
-    container_name: dc_script
-    links:
-      - db
-    volumes:
-      - type: bind
-        source: ./app
-        target: /usr/src/app
-    command: ["python", "./populate.py"]
+  # script:
+  #   build: ./app
+  #   container_name: dc_script
+  #   links:
+  #     - db
+  #   volumes:
+  #     - type: bind
+  #       source: ./app
+  #       target: /usr/src/app
+  #   command: ["python", "./api_database.py"]
   app:
     build: ./app
     container_name: dc_app
@@ -22,7 +22,7 @@ services:
   db:
     image: postgres
     container_name: dc_db
-    #restart: always
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -30,10 +30,9 @@ services:
     networks: 
       - default
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports: 
       - 5432:5432
-  
   # redis:
   #   image: redis:latest
   #   container_name: dc_redis
@@ -52,5 +51,3 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "postgres"
     ports:
       - "16543:80"
-volumes:
-  pgdata:
