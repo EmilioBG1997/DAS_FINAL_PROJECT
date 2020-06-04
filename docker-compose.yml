@@ -30,7 +30,8 @@ services:
     networks: 
       - default
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres-data:/var/lib/postgresql/data
     ports: 
       - 5432:5432
   # redis:
