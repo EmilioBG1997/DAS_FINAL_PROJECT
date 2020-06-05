@@ -33,14 +33,14 @@ Utilizando las tecnlogías mencionadas anteriormente, hay que construir una seri
 Utilizamos **Materialize** como framework para el CSS de la aplicación web. 
 
 ## Instrucciones
-1. Clonar o descargar el repositorio.
+1. Clonar o descargar el repositorio.<br>
 En caso de que lo hayas descargado, tambien hay que extraerlo.
 2. Entrar a la carpeta del reposositorio y abrir una terminal en ella.
 3. Detener los contenedores.  
 
 <code>$ docker kill [container id]</code>
 
-4. Eliminar las Imagenes. 
+4. Eliminar las Imagenes.<br>
 Para prevenir problemas, si sabes lo que estas haciendo puedes saltar este paso.
 
 <code>$ docker system prune -a</code>
@@ -58,8 +58,7 @@ Nota: Una vez que este corriendo podremos ver en consola lo que esta ocurriendo,
 
 7. Para detener la Ejecución hay que presionar <kbd>CTRL</kbd> + <kbd>C</kbd> y esperar a que los contenedores se detengan
 
-Nota: Puede forzarce la detención de los contenedores si durante el proceso de detención "graciosa" se vuelve a presionar  
-<kbd>CTRL</kbd> + <kbd>C</kbd>
+Nota: Puede forzarce la detención de los contenedores si durante el proceso de detención "graciosa" se vuelve a presionar <kbd>CTRL</kbd> + <kbd>C</kbd>
 
 
 ## Agradecimientos
