@@ -60,6 +60,34 @@ Nota: Una vez que este corriendo podremos ver en consola lo que esta ocurriendo,
 
 Nota: Puede forzarce la detención de los contenedores si durante el proceso de detención "graciosa" se vuelve a presionar <kbd>CTRL</kbd> + <kbd>C</kbd>
 
+## Estructura
+Para poder visualizar la base de datos se deben de realizar los siguientes pasos:
+1. Ingresar al host :  http://0.0.0.0:5050. (realizar el paso 7 anteriormente mencionado para acceder al pgadmin)<br>
+2. Nos mostrara un panel del lado izquierdo. Dar clic derecho en servers y en seguida en la opcion create >> server, se abrira una ventana <code>GENERAL</code> donde ingresaran DAS en el apartado name
+3. A continuacion deberan irse a <code>Connection</code> e ingresaran:
+<code>name: dc_db</code>
+<code>user: postres</code>
+<code>password:postgres</code>
+En seguida les mostrara <code>DATABASES</code> en el panel del lado izquierdo, se le dara clic y les aparece la base <code>dc_heroes</code>
+
+4. Por ultimo clic en guardar y en nuestro panel izquierdo nos mostrara nuestra Base de datos.
+
+## DIAGRAMA DE LA ARQUITECTURA DE TU PROYECTO Y DIAGRAMA DE LA BASE DE DATOS
+Para poder generar nuestro diagrama de arquitectura utilizamos la herramienta de https://diagrams.mingrammer.com/
+Para correr el script es necesario instalar lo siguiente:
+<code>$ sudo apt install graphviz</code>
+<code>$ pip3 install diagrams</code>
+El script llamado horizontal.py es el que genera la imagen e la arquitectura, se puede ejecutar con el comando 
+<code>$ python3  horizontal.py</code>
+Mientras para generar nuestro diagrama de base de datos usamos una herramienta online
+
+Estos archivos los podras encontrar en la carpeta llamada <code>DIAGRAMS</code>
+
+## Tiempo
+- Request directo a la API de superheroes: 15 segundos
+- Request a la información de la DB en PostgreSQL: 6.28 e^-5 segundos
+- Request al nodo de caché en Redis: 0.02055 segundos
+Estos resultados se pueden encontrar en la carpeta <code>EVidencias</code>
 
 ## Agradecimientos
 - Al Profesor Angel Santiago Jaime Zavala por brindarnos atención dentro y fuera de la clase aún dentro de estos tiempos tan complicados y por enseñarnos tecnologías de punta de lanza.
