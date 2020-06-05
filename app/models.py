@@ -36,7 +36,7 @@ class SUPER_HEROE(Model):
         db_table = "SUPER_HEROE"
 
 class SUPERHEROES_STATS(Model):
-    id =CharField()
+    id =IntegerField()
     intelligence = CharField()
     strength = CharField()
     speed = CharField()

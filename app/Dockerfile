@@ -10,7 +10,10 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 # Install any needed packages specified in requirements.txt
+
+CMD ["pip install redis"]
 RUN pip install --no-cache-dir -r requirements.txt
 
 # run the command
 CMD ["python", "./app.py"]
+ 

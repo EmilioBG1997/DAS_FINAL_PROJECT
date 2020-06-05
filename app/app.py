@@ -1,7 +1,11 @@
 from flask import Flask, render_template
 from models import *
+import redis
+import json
 
+client = redis.Redis(host='dc_redis', port=6379)
 app = Flask(__name__)
+cache_heroes = []
 
 @app.route("/")
 def index():
@@ -10,13 +14,50 @@ def index():
 @app.route("/heroes")
 def DcHeroes():
     dc = []
-    for i in range(100):
-        super_heroes = SUPER_HEROE.select().where(SUPER_HEROE.id == i)
-        for hero in super_heroes:
-            dc.append({
-                "id":hero.id,
-                "name":hero.name
-                })
+    
+    if(not cache_heroes):
+        for i in range(int(SUPER_HEROE.select().count())):
+            print(f'vuelta {i}')
+            data = SUPER_HEROE.get(SUPER_HEROE.id == i)
+            data2 = SUPERHEROES_STATS.get(SUPERHEROES_STATS.id == i)
+            dictionary = {
+                "id": data.id,
+                "name": data.name,
+                "full_name": data.full_name,
+                "alter_egos": data.alter_egos,
+                "aliases": data.aliases,
+                "place_of_birth": data.place_of_birth,
+                "first_appearance": data.first_appearance,
+                "publisher":data.publisher,
+                "alignment": data.alignment,
+                "gender": data.gender,
+                "race": data.race,
+                "height": data.height,
+                "weigth": data.weight,
+                "eye_color" : data.eye_color,
+                "hair_color": data.hair_color,
+                "occupation": data.occupation,
+                "base": data.base,
+                "group_affiliation":data.group_affiliation,
+                "relatives": data.relatives,
+                "image": data.image,
+                "intelligence": data2.intelligence,
+                "strength": data2.strength,
+                "speed": data2.speed,
+                "durability": data2.durability,
+                "power": data2.power,
+                "combat": data2.combat
+            }
+            valor = json.dumps(dictionary)
+            llave = str(i)
+            client.set(llave,valor)
+            dc.append(dictionary)
+            cache_heroes.append(llave)
+    else:
+        for i in cache_heroes:
+            print(f"vuelta {i}")
+            dc.append(json.loads(client.get(str(i))))
+
     return render_template("heroes.html" , dc=dc)
 
 @app.route("/heroes/<hero>")
