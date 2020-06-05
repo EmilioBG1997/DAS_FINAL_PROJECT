@@ -17,11 +17,13 @@
 </head>
 <body>
     <div class="container">
-        <div class="card">
-            <div class="collection">
-                {%for i in DC%}
-                    <a class="collection" href="/heroes/{{i}}">{{i}}</a>
-                {% endfor %}
+        <div class="row">    
+            <div class="card col s4 offset-s4">
+                <div class="collection">
+                    {%for i in dc%}
+                        <a class="collection-item" href="/heroes/{{i.get('id')}}">{{i.get("name")}}</a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

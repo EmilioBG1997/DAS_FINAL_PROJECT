@@ -34,3 +34,18 @@ class SUPER_HEROE(Model):
     class Meta:
         database = db
         db_table = "SUPER_HEROE"
+
+class SUPERHEROES_STATS(Model):
+    id =CharField()
+    intelligence = CharField()
+    strength = CharField()
+    speed = CharField()
+    durability = CharField()
+    power = CharField()
+    combat = CharField()
+
+    class Meta:
+        database = db
+        db_table = "SUPERHEROES_STATS" 
+
+

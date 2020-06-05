@@ -9,6 +9,7 @@ def main():
     for i in data:
         try:
             SUPER_HEROE.create_table()
+            SUPERHEROES_STATS.create_table()
         except:
             pass
         try: 
@@ -38,8 +39,18 @@ def main():
                 relatives = i.get("connections",{}).get("relatives"),
                 image = i.get("image",{}).get("url")
             )
-        except:
-            print(" no se agrego ")
+
+            SUPERHEROES_STATS.get_or_create(
+                id = id,
+                intelligence = i.get("powerstats",{}).get("intelligence"),
+                strength = i.get("powerstats",{}).get("strength"),
+                speed = i.get("powerstats",{}).get("speed"),
+                durability = i.get("powerstats",{}).get("durability"),
+                power = i.get("powerstats",{}).get("power"),
+                combat = i.get("powerstats",{}).get("combat")
+            )
+        except Exception as e:
+            print(f"{e} no se agrego ")
         id += 1
 if __name__ == "__main__":
     main()
