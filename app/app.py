@@ -62,41 +62,42 @@ def DcHeroes():
 
 @app.route("/heroes/<hero>")
 def Hero(hero):
-    super_heroes = SUPER_HEROE.select().where(SUPER_HEROE.id == hero)
-    super_stats = SUPERHEROES_STATS.select().where(SUPERHEROES_STATS.id == hero)
-    for hero in super_heroes:    
-        dc= {
-                "id":hero.id,
-                "name": hero.name,
-                "full_name": hero.full_name,
-                "alter_egos": hero.alter_egos,
-                "aliases": hero.aliases,
-                "place_of_birth": hero.place_of_birth,
-                "first_appearance": hero.first_appearance,
-                "publisher":hero.publisher,
-                "alignment": hero.alignment,
-                "gender": hero.gender,
-                "race": hero.race,
-                "height": hero.height,
-                "weigth": hero.weight,
-                "eye_color" : hero.eye_color,
-                "hair_color": hero.hair_color,
-                "occupation": hero.occupation,
-                "base": hero.base,
-                "group_affiliation":hero.group_affiliation,
-                "relatives": hero.relatives,
-                "image": hero.image
-            }
-    for stat in super_stats:
-        dc_stats = {
-            "intelligence": stat.intelligence,
-            "strength": stat.strength,
-            "speed": stat.speed,
-            "durability": stat.durability,
-            "power": stat.power,
-            "combat": stat.combat
+    if (not (str(hero) in cache_heroes)):
+        super_heroes = SUPER_HEROE.get(SUPER_HEROE.id == hero)
+        super_stats = SUPERHEROES_STATS.get(SUPERHEROES_STATS.id == hero)
+        dc = {
+            "id":super_heroes.id,
+            "name": super_heroes.name,
+            "full_name": super_heroes.full_name,
+            "alter_egos": super_heroes.alter_egos,
+            "aliases": super_heroes.aliases,
+            "place_of_birth": super_heroes.place_of_birth,
+            "first_appearance": super_heroes.first_appearance,
+            "publisher":super_heroes.publisher,
+            "alignment": super_heroes.alignment,
+            "gender": super_heroes.gender,
+            "race": super_heroes.race,
+            "height": super_heroes.height,
+            "weigth": super_heroes.weight,
+            "eye_color" : super_heroes.eye_color,
+            "hair_color": super_heroes.hair_color,
+            "occupation": super_heroes.occupation,
+            "base": super_heroes.base,
+            "group_affiliation":super_heroes.group_affiliation,
+            "relatives": super_heroes.relatives,
+            "image": super_heroes.image,
+            "intelligence": super_stats.intelligence,
+            "strength": super_stats.strength,
+            "speed": super_stats.speed,
+            "durability": super_stats.durability,
+            "power": super_stats.power,
+            "combat": super_stats.combat
         }
-    return render_template("hero.html", dc = dc, dc_stats=dc_stats)
+        llave = str(super_heroes.id)
+        valor = json.dumps(dc)
+        client.set(llave,valor)
+    dc = json.loads(client.get(str(hero)))
+    return render_template("hero.html", dc = dc)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0" , port=5000)
