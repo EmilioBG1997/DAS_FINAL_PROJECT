@@ -22,6 +22,7 @@ def DcHeroes():
 @app.route("/heroes/<hero>")
 def Hero(hero):
     super_heroes = SUPER_HEROE.select().where(SUPER_HEROE.id == hero)
+    super_stats = SUPERHEROES_STATS.select().where(SUPERHEROES_STATS.id == hero)
     for hero in super_heroes:    
         dc= {
                 "id":hero.id,
@@ -45,7 +46,16 @@ def Hero(hero):
                 "relatives": hero.relatives,
                 "image": hero.image
             }
-    return render_template("hero.html", dc = dc)
+    for stat in super_stats:
+        dc_stats = {
+            "intelligence": stat.intelligence,
+            "strength": stat.strength,
+            "speed": stat.speed,
+            "durability": stat.durability,
+            "power": stat.power,
+            "combat": stat.combat
+        }
+    return render_template("hero.html", dc = dc, dc_stats=dc_stats)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0" , port=5000)

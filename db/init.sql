@@ -25,12 +25,12 @@ CREATE TABLE IF NOT EXISTS SUPER_HEROE(
 );
 
 CREATE TABLE IF NOT EXISTS SUPERHEROES_STATS(
-    id integer ,
-    intelligence integer,
-    strength integer,
-    speed integer,
-    durability integer,
-    power integer,
-    COMBAT integer,
+    id VARCHAR(10) ,
+    intelligence VARCHAR(10),
+    strength VARCHAR(10),
+    speed VARCHAR(10),
+    durability VARCHAR(10),
+    power VARCHAR(10),
+    COMBAT VARCHAR(10),
     PRIMARY KEY (id)
 );
