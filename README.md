@@ -87,7 +87,7 @@ Estos archivos los podras encontrar en la carpeta llamada <code>DIAGRAMS</code>
 - Request directo a la API de superheroes: 15 segundos
 - Request a la información de la DB en PostgreSQL: 6.28 e^-5 segundos
 - Request al nodo de caché en Redis: 0.02055 segundos
-Estos resultados se pueden encontrar en la carpeta <code>EVidencias</code>
+Estos resultados se pueden encontrar en la carpeta <code>Evidencias</code>
 
 ## Agradecimientos
 - Al Profesor Angel Santiago Jaime Zavala por brindarnos atención dentro y fuera de la clase aún dentro de estos tiempos tan complicados y por enseñarnos tecnologías de punta de lanza.
