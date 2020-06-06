@@ -30,7 +30,7 @@ Con este proyecto se busca demostrar que los conocimientos del profesor han sido
 Se utilizarán las tecnologías que se manejaron a lo largo del ciclo escolar.
 
 ## Descripción
-Utilizando las tecnlogías mencionadas anteriormente, hay que construir una serie de contenedores de **Docker** conectados entre si para servir una aplicación implementada con **Python** que mostrara una lista de heroes de DC Comics & , utilizando *flask* como framework web, estilizada con **Materialize** y *peewee* como ORM. la app es alimentada con una base de datos de **PostgreSQL** que puede ser administrada con la imagen de **pgAdmin** incluida en el *docker-compose*. Adicionalmente, se implementa un contenedor con una imagen de **Redis** para encargarse del cache generado por la base de datos para agilizar las consultas a la misma.  
+Utilizando las tecnlogías mencionadas anteriormente, hay que construir una serie de contenedores de **Docker** conectados entre si para servir una aplicación implementada con **Python** que mostrara una lista de heroes de DC Comics, utilizando *flask* como framework web, estilizada con **Materialize** y *peewee* como ORM. la app es alimentada con una base de datos de **PostgreSQL** que puede ser administrada con la imagen de **pgAdmin** incluida en el *docker-compose*. Adicionalmente, se implementa un contenedor con una imagen de **Redis** para encargarse del cache generado por la base de datos para agilizar las consultas a la misma.  
  
 
 ### Estructura
@@ -40,7 +40,7 @@ Lleva el nombre de *"dc_db"*
 - ***Contenedor B***: Contiene una imagen funcional de **PgAdmin4**  
 Lleva el nombre de *"dc_pgadmin"*
 - ***Contenedor C***: Contiene un scrapper que se encarga de traer los datos de [superheroapi](https://superheroapi.com/) e ingresarlos a la base de datos.  
-LLeva el nombre de *dc_script*
+Lleva el nombre de *dc_script*
 - ***Contenedor D***: Contiene una implementacion de **Flask** que se encarga de mostrar todos los datos obtenidos de [superheroapi](https://superheroapi.com/) y tambien del cache generado por el contenedor E.  
 Lleva el nombre de *dc_app*
 - ***Contenedor E***: Contiene una imagen funcional de **Redis**, se encarga de administrar el cache de nuestra aplicacion.  
@@ -52,7 +52,7 @@ Lleva el nombre de *dc_redis*
 1. Clonar o descargar el repositorio.<br>
 En caso de que lo hayas descargado, tambien hay que extraerlo.
 2. Entrar a la carpeta del reposositorio y abrir una terminal en ella.
-3. Detener los contenedores.  
+3. Detener todos los contenedores.  
 
 <code>$ docker kill [container id]</code>
 
@@ -77,9 +77,11 @@ Para prevenir problemas, si sabes lo que estas haciendo puedes saltar este paso.
 >Nota: Puede forzarce la detención de los contenedores si durante el proceso de detención "graciosa" se vuelve a presionar <kbd>CTRL</kbd> + <kbd>C</kbd>
 
 8. Adicionalmente podemos verificar e interactuar con nuestros contenedores si corremos el docker-compose en modo "detached"  
-<code>$ sudo docker-compose -d</code>  
+<code>$ docker-compose -d</code>
 
-### *Instrucciones Especificas* ***PgAdmin***
+>Nota, si existe algún problema corriendo los comandos, prueba agregar *sudo* y un espacio a cada uno para poder correrlos en modo root.
+
+### Instrucciones Especificas *PgAdmin*
 Para poder visualizar la base de datos se deben de realizar los siguientes pasos:
 1. Ingresar a http://0.0.0.0:5050.
 2. Ingresar los datos de inicio de sesion mencionados anteriormente.
