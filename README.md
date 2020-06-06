@@ -68,9 +68,9 @@ Para poder visualizar la base de datos se deben de realizar los siguientes pasos
 <code>name: dc_db</code>
 <code>user: postres</code>
 <code>password:postgres</code>
-En seguida les mostrara <code>DATABASES</code> en el panel del lado izquierdo, se le dara clic y les aparece la base <code>dc_heroes</code>
+Por ultimo se le dara en la opcion guardar.
 
-4. Por ultimo clic en guardar y en nuestro panel izquierdo nos mostrara nuestra Base de datos.
+4. En seguida les mostrara <code>DATABASES</code> en el panel del lado izquierdo, se le dara clic y les aparece la base <code>dc_heroes</code>
 
 ## DIAGRAMA DE LA ARQUITECTURA DE TU PROYECTO Y DIAGRAMA DE LA BASE DE DATOS
 Para poder generar nuestro diagrama de arquitectura utilizamos la herramienta de https://diagrams.mingrammer.com/
