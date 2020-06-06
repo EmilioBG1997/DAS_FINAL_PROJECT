@@ -40,11 +40,11 @@ Lleva el nombre de *"dc_db"*
 - ***Contenedor B***: Contiene una imagen funcional de **PgAdmin4**  
 Lleva el nombre de *"dc_pgadmin"*
 - ***Contenedor C***: Contiene un scrapper que se encarga de traer los datos de [superheroapi](https://superheroapi.com/) e ingresarlos a la base de datos.  
-Lleva el nombre de *dc_script*
+Lleva el nombre de *"dc_script"*
 - ***Contenedor D***: Contiene una implementacion de **Flask** que se encarga de mostrar todos los datos obtenidos de [superheroapi](https://superheroapi.com/) y tambien del cache generado por el contenedor E.  
-Lleva el nombre de *dc_app*
+Lleva el nombre de *"dc_app"*
 - ***Contenedor E***: Contiene una imagen funcional de **Redis**, se encarga de administrar el cache de nuestra aplicacion.  
-Lleva el nombre de *dc_redis*
+Lleva el nombre de *"dc_redis"*
 
 
 
