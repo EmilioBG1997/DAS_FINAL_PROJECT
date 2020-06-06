@@ -85,7 +85,7 @@ Para prevenir problemas, si sabes lo que estas haciendo puedes saltar este paso.
 Para poder visualizar la base de datos se deben de realizar los siguientes pasos:
 1. Ingresar a http://0.0.0.0:5050.
 2. Ingresar los datos de inicio de sesion mencionados anteriormente.
-3. Se un panel del lado izquierdo. Dar clic derecho en *servers* y en seguida en la opcion *create >> server*, se abrira una ventana <code>GENERAL</code> donde se ingresara DAS en el apartado *name*.
+3. Se muestra un panel al lado izquierdo. Dar clic derecho en *servers* y en seguida en la opcion *create >> server*, se abrira una ventana <code>GENERAL</code> donde se ingresara DAS en el apartado *name*.
 4. A continuacion hacer click en <code>Connection</code> e ingresar:
 
 <code>name: dc_db</code>
